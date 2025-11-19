@@ -11,6 +11,7 @@ A powerful, lightweight, and feature-rich HTML5 Canvas drawing library with real
 - 🎯 **Simple API** - Easy to integrate and use
 - 🌐 **Real-time Collaboration** - Socket.IO integration for multi-user drawing
 - 📱 **Touch Support** - Works seamlessly on mobile devices
+- 🤏**Micro-stroeks style** - sync drawing data with micro-storkes
 - 🎨 **Multiple Tools** - Brush, eraser, and fill bucket
 - 💾 **Data Export** - Save and load drawings
 - ⚡ **High Performance** - Optimized for smooth drawing experience
@@ -49,6 +50,84 @@ whiteboard.setUpEvents();
 whiteboard.setTool("brush");
 whiteboard.setColorPickerValue("#ff0000");
 whiteboard.setBrushSize(5);
+```
+
+### React with useRef
+
+```tsx
+import React, { useRef, useEffect } from "react";
+import WhiteboardCanvas from "canvas-sketch";
+
+const DrawingComponent: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const whiteboardRef = useRef<WhiteboardCanvas | null>(null);
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      // Initialize whiteboard with canvas ref
+      whiteboardRef.current = new WhiteboardCanvas({
+        canvas: canvasRef.current,
+        options: {
+          width: 800,
+          height: 600,
+          backgroundColor: "#ffffff",
+        },
+      });
+
+      // Enable drawing
+      whiteboardRef.current.setUpEvents();
+
+      // Set initial properties
+      whiteboardRef.current.setTool("brush");
+      whiteboardRef.current.setColorPickerValue("#ff0000");
+      whiteboardRef.current.setBrushSize(5);
+    }
+
+    // Cleanup on unmount
+    return () => {
+      if (whiteboardRef.current) {
+        whiteboardRef.current.removeEvents();
+      }
+    };
+  }, []);
+
+  const handleToolChange = (tool: "brush" | "eraser" | "fill") => {
+    whiteboardRef.current?.setTool(tool);
+  };
+
+  const handleColorChange = (color: string) => {
+    whiteboardRef.current?.setColorPickerValue(color);
+  };
+
+  const handleSizeChange = (size: number) => {
+    whiteboardRef.current?.setBrushSize(size);
+  };
+
+  const clearCanvas = () => {
+    whiteboardRef.current?.clearCanvas();
+  };
+
+  return (
+    <div>
+      <canvas ref={canvasRef} />
+      <div>
+        <button onClick={() => handleToolChange("brush")}>Brush</button>
+        <button onClick={() => handleToolChange("eraser")}>Eraser</button>
+        <button onClick={() => handleToolChange("fill")}>Fill</button>
+        <input type="color" onChange={(e) => handleColorChange(e.target.value)} />
+        <input
+          type="range"
+          min="1"
+          max="20"
+          onChange={(e) => handleSizeChange(parseInt(e.target.value))}
+        />
+        <button onClick={clearCanvas}>Clear</button>
+      </div>
+    </div>
+  );
+};
+
+export default DrawingComponent;
 ```
 
 ### HTML Setup
@@ -96,6 +175,13 @@ socket.on("stroke-batch", (data) => {
   whiteboard.syncStrokeBatchData(data.strokes);
 });
 
+// Handle real-time fill color
+socket.on("single-stroke", (data)=>{
+  const {stroke,type} = data
+  whiteboard.syncStrokeBatchData(stroke,type)
+})
+
+// clear canvas 
 socket.on("canvas-clear", () => {
   whiteboard.syncClearCanvas();
 });
@@ -117,11 +203,14 @@ socket.on("canvas-clear", () => {
 
 ### Real-time Methods
 
-| Method                         | Description          | Example                                        |
-| ------------------------------ | -------------------- | ---------------------------------------------- |
-| `setUpSocket(config)`          | Configure Socket.IO  | `whiteboard.setUpSocket({socket, roomId, id})` |
-| `syncStrokeBatchData(strokes)` | Apply remote strokes | `whiteboard.syncStrokeBatchData(data.strokes)` |
-| `sendCompleteDrawing()`        | Send current drawing | `whiteboard.sendCompleteDrawing()`             |
+| Method                         | Event Name           | Description          | Example                                        |
+| ------------------------------ | -------------------- | -------------------- | ---------------------------------------------- |
+| `setUpSocket(config)`          | -                    | Configure Socket.IO  | `whiteboard.setUpSocket({socket, roomId, id})` |
+| `syncStrokeBatchData(strokes)` | `stroke-batch`       | Apply remote strokes | `whiteboard.syncStrokeBatchData(data.strokes)` |
+| `syncSingleStorkes(stroke,type)` | `single-stroke`       | Apply fill colors | `whiteboard.syncStrokeBatchData(data.storke,data.type)` |
+| `syncClearCanvas()` | `canvas-clear`       | clear canvas | `whiteboard.syncClearCanvas()` |
+| `syncDrawing(strokes)` | `drawing-sync`       | sync entire remote canvas state | `whiteboard.syncDrawing(data.strokes)` |
+| `sendCompleteDrawing()`        | `complete-drawing`   | Send current drawing | `whiteboard.sendCompleteDrawing()`             |
 
 ### Utility Functions
 
@@ -148,12 +237,6 @@ const binaryData = CommonUtilities.encodeDrawingBinary(strokes);
 - **Batch processing** reduces network overhead
 - **Binary encoding** - 90% smaller than JSON
 - **Color palette system** reduces data size
-
-### Memory Efficient
-
-- **Delta encoding** for coordinates
-- **Context caching** prevents redundant updates
-- **Automatic buffer management**
 
 ## 🎨 Drawing Tools
 
@@ -206,14 +289,6 @@ whiteboard.exportData();
 // Get as JSON string
 const drawingData = whiteboard.getMicroStrokesJSON();
 console.log(drawingData);
-```
-
-### Import/Load Drawing
-
-```typescript
-// Apply drawing data
-const strokes = JSON.parse(drawingData);
-whiteboard.syncDrawing(strokes);
 ```
 
 ## 🔧 Configuration Options

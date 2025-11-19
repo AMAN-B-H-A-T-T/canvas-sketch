@@ -1,7 +1,7 @@
 class CommonUtilities {
   // Helper function to convert RGB to hex
-
-  static readonly colorPalette = [
+  
+  static  colorPalette:Array<string> = [
     "#000000",
     "#FFFFFF",
     "#FF0000",
