@@ -204,7 +204,7 @@ whiteboard.setUpEvents(); // Enables both mouse and touch
 whiteboard.exportData();
 
 // Get as JSON string
-const drawingData = whiteboard.getSkribblJSON();
+const drawingData = whiteboard.getMicroStrokesJSON();
 console.log(drawingData);
 ```
 
@@ -443,7 +443,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: [your-email]
-- 🐛 Issues: [GitHub Issues](your-issues-url)
-- 💬 Discussions: [GitHub Discussions](your-discussions-url)
+- 📧 Email: [yaam.dark@gmail.com]
+- 🐛 Issues: [GitHub Issues](https://github.com/AMAN-B-H-A-T-T/canvas-sketch/issues)
 - 📖 Documentation: [Full API Docs](./API_DOCUMENTATION.md)

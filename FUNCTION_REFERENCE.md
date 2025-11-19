@@ -84,7 +84,7 @@ new WhiteboardCanvas({ canvas, options, socket });
 - **Example**: `whiteboard.exportData()`
 - **Note**: Includes binary data + metadata for efficiency
 
-### `getSkribblJSON()`
+### `getMicroStrokesJSON()`
 
 - **Purpose**: Get drawing data as compact JSON string
 - **Parameters**: None
@@ -93,7 +93,7 @@ new WhiteboardCanvas({ canvas, options, socket });
 - **Example**:
 
 ```typescript
-const data = whiteboard.getSkribblJSON();
+const data = whiteboard.getMicroStrokesJSON();
 localStorage.setItem("drawing", data);
 ```
 
@@ -330,7 +330,7 @@ socket.on("canvas-clear", () => whiteboard.syncClearCanvas());
 
 ```typescript
 // Save
-const drawingData = whiteboard.getSkribblJSON();
+const drawingData = whiteboard.getMicroStrokesJSON();
 localStorage.setItem("drawing", drawingData);
 
 // Load

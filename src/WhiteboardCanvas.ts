@@ -351,7 +351,7 @@ class WhiteboardCanvas {
   };
 
   /**
-   * Optimized real-time stroke sender (Skribbl.io style)
+   * Optimized real-time stroke sender 
    * Uses minimal throttling and batching for performance
    */
   private sendRealtimeStroke = (
@@ -590,14 +590,14 @@ class WhiteboardCanvas {
   /**
    * Get JSON string of micro-strokes style data (ultra-compact for real-time)
    */
-  public getSkribblJSON = () => {
+  public getMicroStrokesJSON = () => {
     return JSON.stringify(this.getMicroStrokesStyleData());
   };
 
   /**
-   * Apply Skribbl-style micro-strokes to canvas
+   * Apply  micro-strokes to canvas
    */
-  private applySkribblData = (microStrokes: Array<any>) => {
+  private applyStrokesData = (microStrokes: Array<any>) => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     microStrokes.forEach((micro) => {
@@ -889,7 +889,7 @@ class WhiteboardCanvas {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.setStorkesLength(0);
 
-    this.applySkribblData(strokes);
+    this.applyStrokesData(strokes);
   };
 }
 

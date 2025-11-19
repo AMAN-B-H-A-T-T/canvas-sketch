@@ -199,7 +199,7 @@ whiteboard.exportData();
 // Contains binary data + metadata for efficient storage
 ```
 
-#### `getSkribblJSON()`
+#### `getMicroStrokesJSON()`
 
 Gets drawing data in compact micro-stroke format.
 
@@ -208,7 +208,7 @@ Gets drawing data in compact micro-stroke format.
 **Example:**
 
 ```typescript
-const drawingData = whiteboard.getSkribblJSON();
+const drawingData = whiteboard.getMicroStrokesJSON();
 console.log("Drawing data:", drawingData);
 
 // Sample output:
