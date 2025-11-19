@@ -1,0 +1,103 @@
+{
+  "name": "canvas-sketch",
+  "version": "1.0.0",
+  "description": "A powerful, lightweight HTML5 Canvas drawing library with real-time collaboration support for building interactive whiteboards, drawing apps, and collaborative sketching tools.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc && npm run build:esm",
+    "build:esm": "tsc --module esnext --outDir dist/esm && mv dist/esm/index.js dist/index.esm.js && rimraf dist/esm",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\""
+  },
+  "keywords": [
+    "canvas",
+    "whiteboard",
+    "drawing",
+    "typescript",
+    "html5-canvas",
+    "interactive-drawing",
+    "collaborative-whiteboard",
+    "realtime-drawing",
+    "canvas-api",
+    "drawing-library",
+    "sketch-pad",
+    "paint-app",
+    "digital-whiteboard",
+    "browser-drawing",
+    "touch-drawing",
+    "mouse-drawing",
+    "drawing-tools",
+    "canvas-drawing",
+    "web-drawing",
+    "javascript-drawing",
+    "socketio",
+    "real-time-collaboration",
+    "multi-user",
+    "collaborative-canvas",
+    "drawing-board",
+    "sketch-canvas",
+    "paint-canvas",
+    "drawing-app",
+    "frontend-library",
+    "ui-component"
+  ],
+  "author": {
+    "name": "AMAN-B-H-A-T-T",
+    "email": "yaam.dark@gmail.com",
+    "url": "https://yourwebsite.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AMAN-B-H-A-T-T/canvas-sketch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AMAN-B-H-A-T-T/canvas-sketch/issues"
+  },
+  "homepage": "https://github.com/AMAN-B-H-A-T-T/canvas-sketch#readme",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "devDependencies": {
+    "rimraf": "^5.0.10",
+    "typescript": "^5.9.3",
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "prettier": "^3.0.0"
+  },
+  "peerDependencies": {
+    "socket.io-client": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "socket.io-client": {
+      "optional": true
+    }
+  }
+}

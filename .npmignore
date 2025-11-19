@@ -1,0 +1,13 @@
+dist/
+node_modules/
+src/
+*.ts
+!*.d.ts
+tsconfig.json
+.eslintrc.json
+.prettierrc
+.gitignore
+tests/
+examples/
+docs/
+.github/
