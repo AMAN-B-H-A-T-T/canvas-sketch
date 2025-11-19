@@ -1,5 +1,5 @@
 {
-  "name": "canvas-sketch",
+  "name": "@collab/canvas-sketch",
   "version": "1.0.0",
   "description": "A powerful, lightweight HTML5 Canvas drawing library with real-time collaboration support for building interactive whiteboards, drawing apps, and collaborative sketching tools.",
   "main": "dist/index.js",

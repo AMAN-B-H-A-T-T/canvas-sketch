@@ -5,15 +5,15 @@ A powerful, real-time collaborative drawing library for HTML5 Canvas with Socket
 ## 📦 Installation
 
 ```bash
-npm install your-package-name
+npm install @collab/canvas-sketch
 # or
-yarn add your-package-name
+yarn add @collab/canvas-sketch
 ```
 
 ## 🚀 Quick Start
 
 ```typescript
-import WhiteboardCanvas from "your-package-name";
+import WhiteboardCanvas from "@collab/canvas-sketch";
 
 // Basic setup
 const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
@@ -354,7 +354,7 @@ Converts RGB values to hex color.
 **Example:**
 
 ```typescript
-import { CommonUtilities } from "your-package-name";
+import { CommonUtilities } from "@collab/canvas-sketch";
 
 const hex = CommonUtilities.rgbToHex(255, 0, 0);
 console.log(hex); // "#FF0000"
@@ -489,7 +489,7 @@ For real-time transmission, strokes are broken into micro-segments:
 ### Basic Drawing App
 
 ```typescript
-import WhiteboardCanvas from "your-package-name";
+import WhiteboardCanvas from "@collab/canvas-sketch";
 
 class DrawingApp {
   private whiteboard: WhiteboardCanvas;
@@ -550,7 +550,7 @@ new DrawingApp();
 ### Real-time Collaborative Drawing
 
 ```typescript
-import WhiteboardCanvas from "your-package-name";
+import WhiteboardCanvas from "@collab/canvas-sketch";
 import io from "socket.io-client";
 
 class CollaborativeDrawing {

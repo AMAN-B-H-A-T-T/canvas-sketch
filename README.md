@@ -1,10 +1,17 @@
 # 🎨 WhiteboardCanvas - Real-time Collaborative Drawing Library
 
-[![npm version](https://badge.fury.io/js/canvas-sketch.svg)](https://badge.fury.io/js/canvas-sketch)
+[![npm version](https://badge.fury.io/js/@collab%2Fcanvas-sketch.svg)](https://badge.fury.io/js/@collab%2Fcanvas-sketch)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 A powerful, lightweight, and feature-rich HTML5 Canvas drawing library with real-time collaboration support. Perfect for building interactive whiteboards, drawing applications, and collaborative sketching tools.
+
+## 📸 Demo
+
+<div align="center">
+  <img src="./public/assets/collab_canvas-sketch.png" alt="WhiteboardCanvas - Real-time Collaborative Drawing" width="90%">
+  <p><em>🎨 Real-time collaborative drawing with multiple tools and touch support</em></p>
+</div>
 
 ## ✨ Features
 
@@ -23,15 +30,15 @@ A powerful, lightweight, and feature-rich HTML5 Canvas drawing library with real
 ### Installation
 
 ```bash
-npm install canvas-sketch
+npm install @collab/canvas-sketch
 # or
-yarn add canvas-sketch
+yarn add @collab/canvas-sketch
 ```
 
 ### Basic Usage
 
 ```typescript
-import WhiteboardCanvas from "canvas-sketch";
+import WhiteboardCanvas from "@collab/canvas-sketch";
 
 // Create a whiteboard
 const whiteboard = new WhiteboardCanvas({
@@ -56,7 +63,7 @@ whiteboard.setBrushSize(5);
 
 ```tsx
 import React, { useRef, useEffect } from "react";
-import WhiteboardCanvas from "canvas-sketch";
+import WhiteboardCanvas from "@collab/canvas-sketch";
 
 const DrawingComponent: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -215,7 +222,7 @@ socket.on("canvas-clear", () => {
 ### Utility Functions
 
 ```typescript
-import { CommonUtilities } from "canvas-sketch";
+import { CommonUtilities } from "@collab/canvas-sketch";
 
 // Color conversion
 const rgb = CommonUtilities.hexToRgb("#ff0000");
@@ -306,7 +313,7 @@ type toolType = "brush" | "fill" | "eraser";
 ## 🎭 Complete Example
 
 ```typescript
-import WhiteboardCanvas, { CommonUtilities } from "canvas-sketch";
+import WhiteboardCanvas, { CommonUtilities } from "@collab/canvas-sketch";
 import io from "socket.io-client";
 
 class DrawingApp {
